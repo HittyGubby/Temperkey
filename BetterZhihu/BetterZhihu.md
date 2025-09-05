@@ -1,0 +1,1 @@
+As in title. though i hardly feels anything other than blocking logon overlay which you can also do using average adblock
