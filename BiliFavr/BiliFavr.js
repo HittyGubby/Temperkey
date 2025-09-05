@@ -8,10 +8,8 @@
 // @grant        GM.xmlHttpRequest
 // ==/UserScript==
 
-(function () {
+(function() {
     'use strict';
-
-    const TARGET_COLLECTION_IDS = [114514, 1919810]; // Replace with your desired collection IDs
 
     // Function to get cookie value
     function getCookie(name) {
@@ -22,14 +20,15 @@
     }
 
     // Function to show toast
-    function showToast(message) {
+    function showToast(message, isSuccess) {
         const toast = document.createElement('div');
         toast.textContent = message;
         toast.style.position = 'fixed';
         toast.style.top = '20px';
         toast.style.left = '50%';
         toast.style.transform = 'translateX(-50%)';
-        toast.style.background = '#4CAF50';
+        toast.style.background = isSuccess ? '#4CAF50' : '#FF0000';
+        toast.style.fontSize = '64px'
         toast.style.color = 'white';
         toast.style.padding = '10px 20px';
         toast.style.borderRadius = '5px';
@@ -64,31 +63,31 @@
             url: 'https://api.bilibili.com/x/v3/fav/resource/deal',
             headers: {
                 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0',
-                'Accept': 'application/json, text/plain, */*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Sec-Fetch-Dest': 'empty',
-                'Sec-Fetch-Mode': 'cors',
-                'Sec-Fetch-Site': 'same-site',
-                'Priority': 'u=0',
-                'Pragma': 'no-cache',
-                'Cache-Control': 'no-cache'
+                          'Accept': 'application/json, text/plain, */*',
+                          'Accept-Language': 'en-US,en;q=0.5',
+                          'Content-Type': 'application/x-www-form-urlencoded',
+                          'Sec-Fetch-Dest': 'empty',
+                          'Sec-Fetch-Mode': 'cors',
+                          'Sec-Fetch-Site': 'same-site',
+                          'Priority': 'u=0',
+                          'Pragma': 'no-cache',
+                          'Cache-Control': 'no-cache'
             },
-            data: `rid=${oid}&type=2&add_media_ids=${TARGET_COLLECTION_IDS.join('%2C')}&del_media_ids=&platform=web&from_spmid=&spmid=333.1245.0.0&statistics=%7B%22appId%22%3A100%2C%22platform%22%3A5%7D&eab_x=1&ramval=14&ga=1&gaia_source=web_normal&csrf=${csrf}`,
-            onload: function (response) {
+            data: `rid=${oid}&type=2&add_media_ids=177294230%2C3447244930&del_media_ids=&platform=web&from_spmid=&spmid=333.1245.0.0&statistics=%7B%22appId%22%3A100%2C%22platform%22%3A5%7D&eab_x=1&ramval=14&ga=1&gaia_source=web_normal&csrf=${csrf}`,
+            onload: function(response) {
                 try {
                     const data = JSON.parse(response.responseText);
                     if (data.code === 0) {
-                        showToast('Video saved to collections!');
+                        showToast('Video saved to collections!', true);
                     } else {
-                        showToast('Failed to save video');
+                        showToast('Failed to save video', false);
                     }
                 } catch (error) {
-                    showToast('Error parsing response');
+                    showToast('Error parsing response', false);
                 }
             },
-            onerror: function () {
-                showToast('Error saving video');
+            onerror: function() {
+                showToast('Error saving video', false);
             }
         });
     }
@@ -111,7 +110,7 @@
 
     // Add keyboard shortcut
     document.addEventListener('keydown', (event) => {
-        if (event.key.toLowerCase() === 'k') {
+        if (event.key.toLowerCase() === 'l') {
             saveToCollection();
         }
     });

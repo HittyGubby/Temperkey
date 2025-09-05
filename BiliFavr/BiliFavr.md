@@ -1,4 +1,4 @@
-Uh, open a vid collection, fill in ids and automates the favorite process (shorcut key 'k')
+Uh, open a vid collection, fill in ids and automates the favorite process (shorcut key 'l' as in lol)
 
 useful when trying to do massive filterings, like i collecting some uploaders' hundreds or thousands of videos for musics, you cant blame me for being lazy to click favorite icon click checkboxes click confirm though
 
