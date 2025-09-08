@@ -3,12 +3,12 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.1
 // @description  Adds a floating button and keyboard shortcut (K) to save Bilibili videos to collections, bypassing CORS with GM.xmlHttpRequest
-// @author       Grok
+// @author       Hitty
 // @match        https://www.bilibili.com/*
 // @grant        GM.xmlHttpRequest
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     // Function to get cookie value
@@ -63,18 +63,18 @@
             url: 'https://api.bilibili.com/x/v3/fav/resource/deal',
             headers: {
                 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0',
-                          'Accept': 'application/json, text/plain, */*',
-                          'Accept-Language': 'en-US,en;q=0.5',
-                          'Content-Type': 'application/x-www-form-urlencoded',
-                          'Sec-Fetch-Dest': 'empty',
-                          'Sec-Fetch-Mode': 'cors',
-                          'Sec-Fetch-Site': 'same-site',
-                          'Priority': 'u=0',
-                          'Pragma': 'no-cache',
-                          'Cache-Control': 'no-cache'
+                'Accept': 'application/json, text/plain, */*',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Sec-Fetch-Dest': 'empty',
+                'Sec-Fetch-Mode': 'cors',
+                'Sec-Fetch-Site': 'same-site',
+                'Priority': 'u=0',
+                'Pragma': 'no-cache',
+                'Cache-Control': 'no-cache'
             },
             data: `rid=${oid}&type=2&add_media_ids=177294230%2C3447244930&del_media_ids=&platform=web&from_spmid=&spmid=333.1245.0.0&statistics=%7B%22appId%22%3A100%2C%22platform%22%3A5%7D&eab_x=1&ramval=14&ga=1&gaia_source=web_normal&csrf=${csrf}`,
-            onload: function(response) {
+            onload: function (response) {
                 try {
                     const data = JSON.parse(response.responseText);
                     if (data.code === 0) {
@@ -86,7 +86,7 @@
                     showToast('Error parsing response', false);
                 }
             },
-            onerror: function() {
+            onerror: function () {
                 showToast('Error saving video', false);
             }
         });

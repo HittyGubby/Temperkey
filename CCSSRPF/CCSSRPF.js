@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Replace window.fetch & XMLHttpRequest with GM_xmlhttpRequest-backed versions
-// @author       zjs
+// @author       Hitty
 // @match        *://*/*
 // @grant        GM_xmlhttpRequest
 // @run-at       document-start

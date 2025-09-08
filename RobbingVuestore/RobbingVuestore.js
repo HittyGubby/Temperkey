@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Force set role to superadmin and hijack isAdmin getter permanently on page load
-// @author       You
+// @author       Hitty
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
