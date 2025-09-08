@@ -1,4 +1,4 @@
-woah wait... huawei font?
+woah wait... google font?
 
 now question for you: whats the matter with ff-based browsers
 

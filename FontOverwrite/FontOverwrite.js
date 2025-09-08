@@ -1,27 +1,37 @@
 // ==UserScript==
-// @name         Custom Font Overwrite
+// @name         Force Font
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Overwrite global font
+// @version      1.0
+// @description  Overrides all fonts to Electrolize from Google Fonts
+// @author       Hitty
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
 
-(function () {
+(function() {
     'use strict';
 
-    let css = `
-    body {
-        font-family: "Huawei Font" !important;
-    }`;
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Electrolize&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
 
-    let style = document.createElement('style');
-
-    if (style.styleSheet) {
-        style.styleSheet.cssText = css;
-    } else {
-        style.appendChild(document.createTextNode(css));
+    const style = document.createElement('style');
+    style.textContent = `
+    * {
+        font-family: 'Electrolize', sans-serif !important;
     }
+    `;
+    document.head.appendChild(style);
 
-    document.getElementsByTagName('head')[0].appendChild(style);
+    const observer = new MutationObserver(() => {
+        document.querySelectorAll('*').forEach(el => {
+            el.style.fontFamily = "'Electrolize' !important";
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 })();
